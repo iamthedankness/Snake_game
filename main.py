@@ -7,6 +7,7 @@ screen.setup(width=600,height=600)
 screen.title("Snake Game")
 screen.bgcolor("black")
 screen.tracer(0)
+SCORE=0
 #TODO
 
 # snake=[]
@@ -39,7 +40,7 @@ def turn_down():
     if segments[0].heading() != up:
         segments[0].setheading(down)
 
-numbers = [-300, -280, -260, -240, -220, -200, -180, -160, -140, -120, -100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300]
+numbers = [-280, -260, -240, -220, -200, -180, -160, -140, -120, -100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280]
 print(numbers)
 
 starting_positions=[(0,0),(-20,0),(-40,0)]
@@ -86,6 +87,10 @@ while game_on:
     if snake[0][0]==food.xcor() and snake[0][1]==food.ycor():
         food.goto(generate_random_cords())
         add_new_segment()
+        SCORE+=1
+    if snake[0] in snake[1:] or snake[0][0]==-300 or snake[0][0]==300 or snake[0][1]==-300 or snake[0][1]==300:
+        game_on=False
+        print("game over")
 
     print(f"snake head x={snake[0][0]} and y={snake[0][1]}")
     print(f"food x={food.ycor()} and y={food.ycor()}")
